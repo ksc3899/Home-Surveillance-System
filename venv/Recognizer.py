@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 import _sqlite3 as sqlite
+from notify_run import Notify
 
 recognizer = cv.face.LBPHFaceRecognizer_create()
 recognizer.read("Recognizer/Training Data.yml")
@@ -14,6 +15,9 @@ def recognizePerson(x, y, w, h, image, grayImage):
     if profile != None:
         cv.putText(image, str(profile[1]) + " - " + str(confidence) + "%", (x, y + h), cv.FONT_HERSHEY_PLAIN, 1.5, (255, 255, 255), 2)
         cv.putText(image, str(profile[2]), (x, y + h + 30), cv.FONT_HERSHEY_PLAIN, 1.5, (255, 255, 255), 2)
+    else:
+        notify = Notify()
+        notify.send("Perimeter compromised... Sending Team Alpha for preliminary action...")
 
     return image
 

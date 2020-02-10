@@ -6,7 +6,7 @@ import os
 
 faceDetect = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-camera = cv.VideoCapture(1)
+camera = cv.VideoCapture(0)
 recognizer = cv.face.LBPHFaceRecognizer_create()
 path = "Data Set"
 
@@ -20,7 +20,7 @@ def createUserData(ID, name, age):
         recordExists = 1
 
     if recordExists == 1:
-        command = "UPDATE PeopleDetails SET Name = " + str(name) + " WHERE ID = " + str(ID)
+       command = "UPDATE PeopleDetails SET Name = " + str(name) + " WHERE ID = " + str(ID)
     else:
         command = "INSERT INTO PeopleDetails(ID, Name, Age) Values(" + str(ID) + ", " + str(name) + ", " + str(age) + ")"
     connection.execute(command)
@@ -63,7 +63,7 @@ while True:
     cv.imshow("Face", image)
 
     cv.waitKey(1)
-    if(sampleNumber >= 100):
+    if(sampleNumber >= 500):
         break
 
 IDs, faces = GetImagesAndIDs(path)

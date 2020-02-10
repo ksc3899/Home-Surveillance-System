@@ -1,14 +1,10 @@
 import Recognizer
 import cv2 as cv
-from notify_run import Notify
 
 isSecured = True
 
 faceDetect = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
 camera = cv.VideoCapture(0)
-
-notify = Notify()
-notify.send("Halloooo fraaandssss!!!")
 
 while True or (isSecured == False):
     _, image = camera.read()
