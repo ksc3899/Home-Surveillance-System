@@ -13,15 +13,16 @@ path = "Data Set"
 
 def createUserData(ID, name, age):
     connection = sqlite.connect("PeopleData.db")
-    command = "SELECT * FROM PeopleDetails WHERE ID = " + str(ID)
-    cursor = connection.execute(command)
-    recordExists = 0
-    for row in cursor:
-        recordExists = 1
+    try:
+        command = "SELECT * FROM PeopleDetails WHERE ID = " + str(ID)
+        cursor = connection.execute(command)
+        recordExists = 0
+        for row in cursor:
+            recordExists = 1
 
-    if recordExists == 1:
-       command = "UPDATE PeopleDetails SET Name = " + str(name) + " WHERE ID = " + str(ID)
-    else:
+        if recordExists == 1:
+            command = "UPDATE PeopleDetails SET Name = " + str(name) + " WHERE ID = " + str(ID)
+    except:
         command = "INSERT INTO PeopleDetails(ID, Name, Age) Values(" + str(ID) + ", " + str(name) + ", " + str(age) + ")"
     connection.execute(command)
     connection.commit()
